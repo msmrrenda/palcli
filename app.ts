@@ -17,7 +17,12 @@ rl.on('line', (line) => {
     const args = line.trim().split(/\s+/);
     const cmd = args.shift()?.toLowerCase();
 
-    const handler = cmd ? command.MainCommands[cmd].handler : command.UnknownCommandHandler;
-    handler(args);
+    if (cmd != null) {
+        if (command.MainCommands[cmd] != null) {
+            command.MainCommands[cmd].handler(args);
+        } else {
+            console.log(`unknown command: ${cmd}`);
+        }
+    }
     rl.prompt();
 });

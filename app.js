@@ -38,8 +38,16 @@ rl.on('line', (line) => {
     var _a;
     const args = line.trim().split(/\s+/);
     const cmd = (_a = args.shift()) === null || _a === void 0 ? void 0 : _a.toLowerCase();
-    const handler = cmd ? command.MainCommands[cmd].handler : command.UnknownCommandHandler;
-    handler(args);
+    if (cmd != null) {
+        if (command.MainCommands[cmd] != null) {
+            command.MainCommands[cmd].handler(args);
+            console.log();
+        }
+        else {
+            console.log(`unknown command: ${cmd}`);
+            console.log();
+        }
+    }
     rl.prompt();
 });
 //# sourceMappingURL=app.js.map

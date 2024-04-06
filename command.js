@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnknownCommandHandler = exports.MainCommands = void 0;
+exports.MainCommands = void 0;
 ;
 exports.MainCommands = {};
 const exit = (args) => {
@@ -8,6 +8,7 @@ const exit = (args) => {
 };
 const exitHelp = "exit this console.";
 const help = (args) => {
+    console.log("");
     console.log("commands:");
     Object.keys(exports.MainCommands).sort().forEach((c) => {
         console.log(`  ${c}`);
@@ -16,10 +17,6 @@ const help = (args) => {
     return 0;
 };
 const helpHelp = "show this message.";
-const UnknownCommandHandler = (args) => {
-    return 0;
-};
-exports.UnknownCommandHandler = UnknownCommandHandler;
 exports.MainCommands['exit'] = { handler: exit, help: exitHelp };
 exports.MainCommands['help'] = { handler: help, help: helpHelp };
 //# sourceMappingURL=command.js.map
