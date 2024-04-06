@@ -7,13 +7,14 @@ const exit = (args) => {
     process.exit(0);
 };
 const exitHelp = "exit this console.";
-const help = (args) => {
+const help = async (args) => {
     console.log("");
     console.log("commands:");
     Object.keys(exports.MainCommands).sort().forEach((c) => {
         console.log(`  ${c}`);
         exports.MainCommands[c].help.split("\n").forEach((i) => console.log(`    ${i}`));
     });
+    console.log("");
     return 0;
 };
 const helpHelp = "show this message.";

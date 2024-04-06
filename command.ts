@@ -1,5 +1,5 @@
 interface CommandDefinition {
-    handler: (arg: string[]) => number;
+    handler: (arg: string[]) => Promise<number>;
     help: string;
 };
 
@@ -13,7 +13,7 @@ const exit = (args: string[]) => {
 const exitHelp = "exit this console.";
 
 
-const help = (args: string[]) => {
+const help = async (args: string[]) => {
     console.log("");
     console.log("commands:");
     Object.keys(MainCommands).sort().forEach((c) => {
