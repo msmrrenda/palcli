@@ -1,5 +1,5 @@
 import path from "node:path";
-import { GlobalConfig } from "./common";
+import { GlobalConfig } from "./interface";
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 
 export interface RestClient {

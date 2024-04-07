@@ -1,7 +1,7 @@
 import * as readline from "node:readline/promises";
-import * as envcfg from "./config";
-import * as command from "./command";
-import * as restclient from "./restclient";
+import * as envcfg from "./common/config";
+import * as command from "./common/command";
+import * as restclient from "./common/restclient";
 import Writable from "node:stream";
 
 const main = async () => {

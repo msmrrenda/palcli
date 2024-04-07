@@ -25,13 +25,9 @@ const init = (globalConfig) => {
     const post = async (url, data) => {
         return await ai.post(url, data).then((res) => { return res.data; });
     };
-    const put = async (url, data) => {
-        return await ai.put(url, data).then((res) => { return res.data; });
-    };
     const client = {
         get,
         post,
-        put,
     };
     return client;
 };

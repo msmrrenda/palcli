@@ -1,11 +1,11 @@
-import { CommandDefinition } from "./common";
+import { CommandDefinition } from "./interface";
 import { RestClient } from "./restclient";
-import * as subcmdInfo from "./subcmd/info";
-import * as subcmdSave from "./subcmd/save";
-import * as subcmdMetrics from "./subcmd/metrics";
-import * as subcmdPlayers from "./subcmd/players";
-import * as subcmdShutdown from "./subcmd/shutdown";
-import * as subcmdAnnounce from "./subcmd/announce";
+import * as subcmdInfo from "../subcmd/info";
+import * as subcmdSave from "../subcmd/save";
+import * as subcmdMetrics from "../subcmd/metrics";
+import * as subcmdPlayers from "../subcmd/players";
+import * as subcmdShutdown from "../subcmd/shutdown";
+import * as subcmdAnnounce from "../subcmd/announce";
 
 export const MainCommands: { [cmdname: string]: CommandDefinition } = {};
 

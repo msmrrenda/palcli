@@ -1,5 +1,5 @@
-import { CommandDefinition } from "../common";
-import { RestClient } from "../restclient";
+import { CommandDefinition } from "../common/interface";
+import { RestClient } from "../common/restclient";
 
 interface ShutdownCommandParams {
     waittime: number | null;

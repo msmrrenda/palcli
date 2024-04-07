@@ -1,4 +1,4 @@
-import { GlobalConfig } from "./common";
+import { GlobalConfig } from "./interface";
 
 export const envconfig: GlobalConfig = {
     ServerAddress: "127.0.0.1",

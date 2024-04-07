@@ -31,9 +31,9 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = __importStar(require("node:readline/promises"));
-const envcfg = __importStar(require("./config"));
-const command = __importStar(require("./command"));
-const restclient = __importStar(require("./restclient"));
+const envcfg = __importStar(require("./common/config"));
+const command = __importStar(require("./common/command"));
+const restclient = __importStar(require("./common/restclient"));
 const main = async () => {
     var _a, e_1, _b, _c;
     var _d;

@@ -24,12 +24,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalCompleter = exports.MainCommands = void 0;
-const subcmdInfo = __importStar(require("./subcmd/info"));
-const subcmdSave = __importStar(require("./subcmd/save"));
-const subcmdMetrics = __importStar(require("./subcmd/metrics"));
-const subcmdPlayers = __importStar(require("./subcmd/players"));
-const subcmdShutdown = __importStar(require("./subcmd/shutdown"));
-const subcmdAnnounce = __importStar(require("./subcmd/announce"));
+const subcmdInfo = __importStar(require("../subcmd/info"));
+const subcmdSave = __importStar(require("../subcmd/save"));
+const subcmdMetrics = __importStar(require("../subcmd/metrics"));
+const subcmdPlayers = __importStar(require("../subcmd/players"));
+const subcmdShutdown = __importStar(require("../subcmd/shutdown"));
+const subcmdAnnounce = __importStar(require("../subcmd/announce"));
 exports.MainCommands = {};
 const exit = (_, args) => {
     process.exit(0);
