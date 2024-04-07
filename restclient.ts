@@ -11,7 +11,6 @@ export interface RestClient {
 export const init = (globalConfig: GlobalConfig) => {
     const cfg = globalConfig;
     const baseURL = new URL(cfg.ApiPrefix,`http://${cfg.ServerAddress}:${cfg.ServerPort}`).toString();
-    console.log(baseURL);
     const reqopt: AxiosRequestConfig = {
         baseURL,
     };

@@ -26,6 +26,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalCompleter = exports.MainCommands = void 0;
 const subcmdInfo = __importStar(require("./subcmd/info"));
 const subcmdSave = __importStar(require("./subcmd/save"));
+const subcmdMetrics = __importStar(require("./subcmd/metrics"));
+const subcmdPlayers = __importStar(require("./subcmd/players"));
 exports.MainCommands = {};
 const exit = (_, args) => {
     process.exit(0);
@@ -52,4 +54,6 @@ exports.MainCommands['exit'] = { handler: exit, help: exitHelp, completer: null 
 exports.MainCommands['help'] = { handler: help, help: helpHelp, completer: null };
 exports.MainCommands['info'] = subcmdInfo.def;
 exports.MainCommands['save'] = subcmdSave.def;
+exports.MainCommands['metrics'] = subcmdMetrics.def;
+exports.MainCommands['players'] = subcmdPlayers.def;
 //# sourceMappingURL=command.js.map

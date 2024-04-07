@@ -2,6 +2,8 @@ import { CommandDefinition } from "./common";
 import { RestClient } from "./restclient";
 import * as subcmdInfo from "./subcmd/info";
 import * as subcmdSave from "./subcmd/save";
+import * as subcmdMetrics from "./subcmd/metrics";
+import * as subcmdPlayers from "./subcmd/players";
 
 export const MainCommands: { [cmdname: string]: CommandDefinition } = {};
 
@@ -35,3 +37,5 @@ MainCommands['exit'] = { handler: exit, help: exitHelp, completer: null };
 MainCommands['help'] = { handler: help, help: helpHelp, completer: null };
 MainCommands['info'] = subcmdInfo.def;
 MainCommands['save'] = subcmdSave.def;
+MainCommands['metrics'] = subcmdMetrics.def;
+MainCommands['players'] = subcmdPlayers.def;

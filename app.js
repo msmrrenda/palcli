@@ -37,22 +37,24 @@ const restclient = __importStar(require("./restclient"));
 const main = async () => {
     var _a, e_1, _b, _c;
     var _d;
-    await tempInputConfig();
+    let client;
+    while (true) {
+        await inputServerConfig();
+        client = restclient.init(envcfg.envconfig);
+        if (await testConnection(client)) {
+            console.log("server connection success.");
+            break;
+        }
+        else {
+            console.error("server connection failed.");
+        }
+    }
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
         prompt: "palcli> ",
         completer: command.globalCompleter,
     });
-    envcfg.PrintConfig();
-    const client = restclient.init(envcfg.envconfig);
-    if (await testConnection(client)) {
-        console.log("server connection success.");
-    }
-    else {
-        console.error("server connection failed.");
-        process.exit(1);
-    }
     console.log('palcli ready');
     rl.prompt();
     try {
@@ -85,20 +87,29 @@ const main = async () => {
     }
     ;
 };
-// �����Ɠǂނ悤�ɂ������߂�
-const tempInputConfig = async () => {
+const inputServerConfig = async () => {
     const tempInterface = readline.createInterface({ input: process.stdin, output: process.stdout });
-    const host = await tempInterface.question("host (default: 127.0.0.1)? ");
-    if (host.trim().length > 0) {
+    const host = await tempInterface.question(`host (default: ${envcfg.envconfig.ServerAddress})? `);
+    if (host.length > 0) {
         envcfg.envconfig.ServerAddress = host;
     }
-    const port = await tempInterface.question("port (default: 8212)? ");
-    if (port.trim().length > 0) {
+    const port = await tempInterface.question(`port (default: ${envcfg.envconfig.ServerPort.toString()})? `);
+    if (port.length > 0) {
         envcfg.envconfig.ServerPort = parseInt(port);
     }
-    const pass = await tempInterface.question("pass? ");
-    envcfg.envconfig.ServerPassword = pass;
     tempInterface.close();
+    const passInterface = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+    process.stdin.setRawMode(true);
+    const pass = await passInterface.question("pass? ");
+    if (pass.length > 0) {
+        envcfg.envconfig.ServerPassword = pass;
+    }
+    else {
+        envcfg.envconfig.ServerPassword = null;
+    }
+    process.stdin.setRawMode(false);
+    process.stdout.write("\n");
+    passInterface.close();
 };
 const testConnection = async (cli) => {
     const result = await cli.get('/info')
@@ -106,8 +117,7 @@ const testConnection = async (cli) => {
         console.log(res);
         return true;
     }).catch((err) => {
-        console.error(err);
-        console.error(err.errors);
+        console.error(err.message);
         return false;
     });
     return result;
