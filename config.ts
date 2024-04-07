@@ -1,14 +1,11 @@
-export interface ClientConfig {
-    ServerAddress: string;
-    ServerPort: number;
-    ServerPassword: string | null;
-    ServerUserName: string;
-};
-export const envconfig: ClientConfig = {
+import { GlobalConfig } from "./common";
+
+export const envconfig: GlobalConfig = {
     ServerAddress: "127.0.0.1",
     ServerPassword: null,
     ServerPort: 8212,
     ServerUserName: "admin",
+    ApiPrefix: "/v1/api",
 };
 
 export const PrintConfig = () => {

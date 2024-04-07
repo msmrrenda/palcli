@@ -33,16 +33,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const readline = __importStar(require("node:readline/promises"));
 const envcfg = __importStar(require("./config"));
 const command = __importStar(require("./command"));
-envcfg.PrintConfig();
-console.log('palcli ready');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: "palcli> ",
-});
+const restclient = __importStar(require("./restclient"));
 const main = async () => {
     var _a, e_1, _b, _c;
     var _d;
+    await tempInputConfig();
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        prompt: "palcli> ",
+        completer: command.globalCompleter,
+    });
+    envcfg.PrintConfig();
+    const client = restclient.init(envcfg.envconfig);
+    if (await testConnection(client)) {
+        console.log("server connection success.");
+    }
+    else {
+        console.error("server connection failed.");
+        process.exit(1);
+    }
+    console.log('palcli ready');
     rl.prompt();
     try {
         for (var _e = true, rl_1 = __asyncValues(rl), rl_1_1; rl_1_1 = await rl_1.next(), _a = rl_1_1.done, !_a; _e = true) {
@@ -53,7 +64,10 @@ const main = async () => {
             const cmd = (_d = args.shift()) === null || _d === void 0 ? void 0 : _d.toLowerCase();
             if (cmd != null) {
                 if (command.MainCommands[cmd] != null) {
-                    await command.MainCommands[cmd].handler(args);
+                    await command.MainCommands[cmd].handler(client, args).catch((reason) => {
+                        console.error('command execution failure:');
+                        console.error(reason);
+                    });
                 }
                 else {
                     console.log(`unknown command: ${cmd}`);
@@ -70,6 +84,33 @@ const main = async () => {
         finally { if (e_1) throw e_1.error; }
     }
     ;
+};
+// �����Ɠǂނ悤�ɂ������߂�
+const tempInputConfig = async () => {
+    const tempInterface = readline.createInterface({ input: process.stdin, output: process.stdout });
+    const host = await tempInterface.question("host (default: 127.0.0.1)? ");
+    if (host.trim().length > 0) {
+        envcfg.envconfig.ServerAddress = host;
+    }
+    const port = await tempInterface.question("port (default: 8212)? ");
+    if (port.trim().length > 0) {
+        envcfg.envconfig.ServerPort = parseInt(port);
+    }
+    const pass = await tempInterface.question("pass? ");
+    envcfg.envconfig.ServerPassword = pass;
+    tempInterface.close();
+};
+const testConnection = async (cli) => {
+    const result = await cli.get('/info')
+        .then((res) => {
+        console.log(res);
+        return true;
+    }).catch((err) => {
+        console.error(err);
+        console.error(err.errors);
+        return false;
+    });
+    return result;
 };
 main();
 //# sourceMappingURL=app.js.map
