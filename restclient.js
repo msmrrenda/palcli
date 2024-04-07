@@ -9,7 +9,6 @@ const axios_1 = __importDefault(require("axios"));
 const init = (globalConfig) => {
     const cfg = globalConfig;
     const baseURL = new URL(cfg.ApiPrefix, `http://${cfg.ServerAddress}:${cfg.ServerPort}`).toString();
-    console.log(baseURL);
     const reqopt = {
         baseURL,
     };

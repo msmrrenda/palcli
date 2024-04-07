@@ -28,6 +28,8 @@ const subcmdInfo = __importStar(require("./subcmd/info"));
 const subcmdSave = __importStar(require("./subcmd/save"));
 const subcmdMetrics = __importStar(require("./subcmd/metrics"));
 const subcmdPlayers = __importStar(require("./subcmd/players"));
+const subcmdShutdown = __importStar(require("./subcmd/shutdown"));
+const subcmdAnnounce = __importStar(require("./subcmd/announce"));
 exports.MainCommands = {};
 const exit = (_, args) => {
     process.exit(0);
@@ -56,4 +58,6 @@ exports.MainCommands['info'] = subcmdInfo.def;
 exports.MainCommands['save'] = subcmdSave.def;
 exports.MainCommands['metrics'] = subcmdMetrics.def;
 exports.MainCommands['players'] = subcmdPlayers.def;
+exports.MainCommands['shutdown'] = subcmdShutdown.def;
+exports.MainCommands['announce'] = subcmdAnnounce.def;
 //# sourceMappingURL=command.js.map

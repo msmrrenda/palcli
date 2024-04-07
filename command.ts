@@ -4,6 +4,8 @@ import * as subcmdInfo from "./subcmd/info";
 import * as subcmdSave from "./subcmd/save";
 import * as subcmdMetrics from "./subcmd/metrics";
 import * as subcmdPlayers from "./subcmd/players";
+import * as subcmdShutdown from "./subcmd/shutdown";
+import * as subcmdAnnounce from "./subcmd/announce";
 
 export const MainCommands: { [cmdname: string]: CommandDefinition } = {};
 
@@ -39,3 +41,5 @@ MainCommands['info'] = subcmdInfo.def;
 MainCommands['save'] = subcmdSave.def;
 MainCommands['metrics'] = subcmdMetrics.def;
 MainCommands['players'] = subcmdPlayers.def;
+MainCommands['shutdown'] = subcmdShutdown.def;
+MainCommands['announce'] = subcmdAnnounce.def;

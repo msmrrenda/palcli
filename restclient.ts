@@ -5,7 +5,6 @@ import axios, { Axios, AxiosRequestConfig } from 'axios';
 export interface RestClient {
     get: (url: string) => Promise<any>;
     post: (url: string,params: any) => Promise<any>;
-    put: (url: string,params: any) => Promise<any>;
 };
 
 export const init = (globalConfig: GlobalConfig) => {
@@ -30,14 +29,9 @@ export const init = (globalConfig: GlobalConfig) => {
         return await ai.post(url, data).then((res) => { return res.data; });
     };
 
-    const put = async (url: string, data: any) => {
-        return await ai.put(url, data).then((res) => { return res.data; });
-    };
-
     const client: RestClient = {
         get,
         post,
-        put,
     };
     return client;
 }
